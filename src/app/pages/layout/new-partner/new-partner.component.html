@@ -1,0 +1,325 @@
+<div class="steppers-container row">
+    <div class="col-md-12 col-lg-12 col-xxxl-12">
+      <nb-card>
+        <nb-card-body>
+          <nb-stepper #stepper>
+            <nb-step [stepControl]="firstForm" label="Infos partenaire">
+              <form [formGroup]="firstForm" (ngSubmit)="onPartnerSubmit()" class="step-container">
+  
+                <div class="row">
+                  <div class="col-md-12">
+                    <nb-card>
+                      <nb-card-header>Informations Partenaire</nb-card-header>
+                      <nb-card-body>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="codePartenaire" class="label">Code Partenaire</label>
+                              <input type="text" nbInput fullWidth id="codePartenaire" placeholder="code Partenaire"
+                                formControlName="codePartenaire" status="info"
+                                [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="designation" class="label">Designation</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="designation"
+                                placeholder="Designation" formControlName="designation" status="info"
+                                [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="localisation" class="label">Localisation</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="localisation"
+                                placeholder="Localisation" formControlName="localisation" status="info"
+                                [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="status" class="label">Status</label>
+                              <div class="demo-items">
+                                <nb-radio-group [(value)]="radioGroupValue">
+                                  <nb-radio [value]="'ACTIVE'">
+                                    ACTIF
+                                  </nb-radio>
+                                  <nb-radio [value]="'INACTIVE'">
+                                    INACTIF
+                                  </nb-radio>
+                                </nb-radio-group>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <button type="submit" nbButton status="primary">Submit</button> -->
+                        <button nbButton matRipple nbStepperNext status="primary">Suivant</button>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+                </div>
+              </form>
+            </nb-step>
+  
+            <nb-step [stepControl]="secondForm" label="Paramètres géneraux">
+              <form [formGroup]="secondForm" (ngSubmit)="onParametreSubmit()" class="step-container">
+  
+                <div class="row">
+                  <div class="col-md-12">
+                    <nb-card>
+                      <nb-card-header>Paramètres Generaux</nb-card-header>
+                      <nb-card-body>
+                        <div class="row">
+                         
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="codePartenaire" class="label">Code Partenaire</label>
+                              <input type="text" nbInput fullWidth id="codePartenaire" placeholder="code Partenaire"
+                                formControlName="codePartenaire" readonly status="info"
+                                [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                            </div>
+                          </div>
+                         
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="bonusrate" class="label">Taux du Bonus</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="bonusrate"
+                                placeholder="Taux Bonus" formControlName="bonusrate"
+                                [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="misemin" class="label">Mise Minimale</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="misemin"
+                                placeholder="Mise minimale" formControlName="misemin"
+                                [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                            </div>
+                          </div>
+  
+                        </div>
+  
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="percentage" class="label">Pourcentage</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="percentage"
+                                placeholder="Percentage" formControlName="percentage"
+                                [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="bonusmin" class="label">Bonus Minimum</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="bonusmin"
+                                placeholder="Bonus minimum" formControlName="bonusmin"
+                                [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="misemax" class="label">Mise Maximale</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="misemax"
+                                placeholder="Mise maximale" formControlName="misemax"
+                                [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                            </div>
+                          </div>
+                         
+                        </div>
+  
+                        <button nbButton matRipple nbStepperPrevious status="warning">Retour</button>
+                        <button nbButton matRipple nbStepperNext status="primary">Suivant</button>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+                </div>
+  
+              </form>
+            </nb-step>
+  
+            <nb-step [stepControl]="thirdForm" label="Ajout jeu">
+              <form [formGroup]="thirdForm" (ngSubmit)="onEnrollSubmit()" class="step-container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <nb-card>
+                      <nb-card-header>Subscription jeu</nb-card-header>
+                      <nb-card-body>
+                        <div class="row" style="margin-top: 0px;">
+                          <div class="col-sm-3 game">
+                            <div class="form-group">
+                              <label for="codePartenaire" class="label">Code Partenaire</label>
+                              <input type="text" nbInput fullWidth id="codePartenaire" placeholder="code Partenaire"
+                                formControlName="codePartenaire" readonly status="info"
+                                [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                          </div>
+                         
+                          <div class="col-sm-3 game">
+                            <div class="form-group">
+                              <label for="bonusrate" class="label">Taux du Bonus</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="bonusrate"
+                                placeholder="Taux Bonus" formControlName="bonusrate" status="info"
+                                [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-3 game">
+                            <div class="form-group">
+                              <label for="misemin" class="label">Mise Minimale</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="misemin"
+                                placeholder="Mise minimale" formControlName="misemin" status="info"
+                                [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-3" style="margin-top: -10px;">
+                            <div class="form-group" id="jeu">
+                              <label for="game" class="label">Jeu</label>
+                              <nb-select placeholder="Custom label" [(selected)]="selectedItem" fullWidth status="info">
+                                <nb-select-label class="nb-label">
+                                  Selected: {{ selectedItem }}
+                                </nb-select-label>
+                          
+                                <nb-option value="keno">Option 1</nb-option>
+                                <nb-option value="bingo">Option 2</nb-option>
+                                <nb-option value="dog">Option 3</nb-option>
+                                <nb-option value="roulette">Option 4</nb-option>
+                              </nb-select>
+                            </div>
+                          </div>
+  
+                        </div>
+  
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label for="percentage" class="label">Pourcentage</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="percentage"
+                                placeholder="Percentage" formControlName="percentage"
+                                [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label for="bonusmin" class="label">Bonus Minimum</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="bonusmin"
+                                placeholder="Bonus minimum" formControlName="bonusmin"
+                                [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label for="misemax" class="label">Mise Maximale</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="misemax"
+                                placeholder="Mise maximale" formControlName="misemax"
+                                [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                          </div>
+  
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label for="status" class="label">Status</label>
+                              <div class="demo-items">
+                                <nb-radio-group [(value)]="gameStatusValue">
+                                  <nb-radio [value]="'ACTIVE'">
+                                    ACTIF
+                                  </nb-radio>
+                                  <nb-radio [value]="'INACTIVE'">
+                                    INACTIF
+                                  </nb-radio>
+                                </nb-radio-group>
+                              </div>
+                            </div>
+                          </div>
+                         
+                        </div>
+  
+                        <button nbButton matRipple nbStepperPrevious status="warning">Retour</button>
+                        <button nbButton matRipple nbStepperNext status="primary">Suivant</button>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+                </div>
+        
+              </form>
+            </nb-step>
+  
+            <nb-step [stepControl]="fourthForm" label="Ajout Salle">
+              <form [formGroup]="fourthForm" (ngSubmit)="onRoomCreationSubmit()" class="step-container">
+                
+                <div class="row">
+                  <div class="col-md-12">
+                    <nb-card>
+                      <nb-card-header>Creation Salle</nb-card-header>
+                      <nb-card-body>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="codePartenaire" class="label">Code Partenaire</label>
+                              <input type="text" nbInput fullWidth id="codePartenaire" placeholder="code Partenaire"
+                                formControlName="codePartenaire" status="info"
+                                [ngClass]="{'form-control-danger': fourthForm.invalid && (fourthForm.dirty || fourthForm.touched)}">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="designation" class="label">Designation</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="designation"
+                                placeholder="Designation" formControlName="designation" status="info"
+                                [ngClass]="{'form-control-danger': fourthForm.invalid && (fourthForm.dirty || fourthForm.touched)}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="localisation" class="label">Localisation</label>
+                              <input type="text" nbInput fullWidth class="form-control" id="localisation"
+                                placeholder="Localisation" formControlName="localisation" status="info"
+                                [ngClass]="{'form-control-danger': fourthForm.invalid && (fourthForm.dirty || fourthForm.touched)}">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="status" class="label">Status</label>
+                              <div class="demo-items">
+                                <nb-radio-group [(value)]="roomGroupValue">
+                                  <nb-radio [value]="'ACTIVE'">
+                                    ACTIF
+                                  </nb-radio>
+                                  <nb-radio [value]="'INACTIVE'">
+                                    INACTIF
+                                  </nb-radio>
+                                </nb-radio-group>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button nbButton matRipple nbStepperPrevious status="warning">Retour</button>
+                        <button nbButton matRipple nbStepperNext status="primary">Suivant</button>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+                </div>
+  
+              </form>
+            </nb-step>
+  
+            <nb-step [stepControl]="fifthForm" [hidden]="true" label="Third step">
+              <div class="step-container">
+                <h3>Partenaire crée!</h3>
+                <button nbButton matRipple (click)="stepper.reset()">Try again</button>
+              </div>
+            </nb-step>
+          </nb-stepper>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>

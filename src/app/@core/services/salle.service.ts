@@ -30,4 +30,8 @@ export class SalleService extends SalleData{
     throw new Error('Method not implemented.');
   }
 
+  listAllPartnerRooms(code: string): Observable<Salle[]> {
+    return this.httpClient.get<Salle[]>(`${this.API_URL}/${this.namespace}/all/partner/${code}`)
+  }
+
 }

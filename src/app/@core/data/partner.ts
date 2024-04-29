@@ -14,7 +14,7 @@ export interface Partner {
 export interface PartnerResponse extends RequestResponse<Partner[]> { }
 
 export abstract class PartnerData {
-    abstract createNewPartner(partner: Partner): Observable<RequestResponse<Partner>>;
-    abstract listAllPartners(): Observable<PartnerResponse>;
+    abstract createNewPartner(partner: Partner): Observable<Partner>;
+    abstract listAllPartners(): Observable<Partner[]>;
     abstract updatePartnerStatus(data: any): Observable<Partner>;
 }

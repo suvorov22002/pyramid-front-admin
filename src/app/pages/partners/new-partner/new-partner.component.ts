@@ -112,9 +112,9 @@ export class NewPartnerComponent implements OnInit {
     // if partner have not created yet
     if (!this.alreadyCreated) {
       this.partnerService.createNewPartner(data).subscribe(
-        (resp: RequestResponse<Partner>) => {
+        (resp: Partner) => {
 
-          this.createdPartner = resp?.data[0];
+          this.createdPartner = resp;
           this.firstForm.patchValue({ codePartenaire: this.createdPartner.codePartner });
           this.alreadyCreated = true;
           setTimeout(() => {

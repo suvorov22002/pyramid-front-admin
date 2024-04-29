@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { Partner } from '../../../@core/data/partner';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './handle-all-partner.component.html',
   styleUrls: ['./handle-all-partner.component.scss']
 })
-export class HandleAllPartnerComponent implements OnInit {
+export class HandleAllPartnerComponent implements OnInit, AfterViewInit {
 
 
   displayedColumns = ['codePartner', 'designation', 'localisation', 'status', 'edit'];
@@ -19,8 +19,8 @@ export class HandleAllPartnerComponent implements OnInit {
   @Input()
   allPartners$: ReplaySubject<Partner[]> = new ReplaySubject(1)
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
 

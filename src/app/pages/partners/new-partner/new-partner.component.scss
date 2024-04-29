@@ -1,45 +1,28 @@
 :host ::ng-deep nb-stepper .step-content {
-    text-align: center;
-  
-    button {
-      cursor: pointer;
-      margin: 0.5rem;
-    }
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
   }
-  
-  .demo-items {
-    flex: 1 0 33%;
-  }
-  
-  nb-radio-group {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  label {
-    display: inline-block;
-    width: 150px;
-    text-align: left;
-  }
-  
-  #jeu {
-   
-    & .nb-label {
-      color: green;
-    }
-  
-    & button.select-button {
-      background-color: rebeccapurple;
-      margin-top: -122px;
-    }
-    nb-select > button.select-button{
-      size: small;
-      background-color: chocolate;
-      margin-top: auto;
-    }
-  }
-  
- .control-danger {
-    color: red;
-    background-color: black;
-  }
+}
+
+.demo-items {
+  flex: 1 0 33%;
+}
+
+nb-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.control-danger {
+  color: red;
+  background-color: black;
+}

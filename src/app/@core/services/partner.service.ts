@@ -44,4 +44,9 @@ export class PartnerService extends PartnerData {
     )
   }
 
+  updatePartnerStatus(data: any): Observable<Partner>{
+    return this.httpClient.put<Partner>(`${this.API_URL}/${this.namespace}/${data.id}/${data.status}`, data, 
+    {headers: new HttpHeaders().set('content-Type', 'application/json')})
+  }
+
 }

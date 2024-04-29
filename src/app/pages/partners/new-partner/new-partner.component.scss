@@ -1,0 +1,28 @@
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+.demo-items {
+  flex: 1 0 33%;
+}
+
+nb-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.control-danger {
+  color: red;
+  background-color: black;
+}

@@ -1,0 +1,62 @@
+//@import '../../../../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+
+.example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+
+.mat-form-field {
+   /* font-size: 14px;
+    width: 100%;
+    line-height: 25px;*/
+    margin-bottom: 0px;
+    border: 4px solid #d51;
+}
+
+
+mat-card{
+    padding: 20px;
+}
+
+::ng-deep .highlight{
+    color: white;
+    background: #673AB7;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+mat-header-cell {
+    font-weight: bold;
+}
+
+/*******************
+  Table
+  *******************/
+.table {
+    width: 100%;
+    text-align: left;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 4px solid #d51;
+    overflow-x: auto !important;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 16px;
+}
+
+.mat-elevation {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)
+}
+
+/*ng-container:nth-child(even){background-color: #f2f2f2}*/

@@ -13,6 +13,8 @@ import {
   NbSelectModule,
   NbIconModule,
   NbThemeModule,
+  NbDialogModule,
+  NbCardModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -41,6 +43,10 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
+import { DialogNamePromptComponent } from './components/dialog-name-prompt/dialog-name-prompt.component';
+import { HandleAllPartnerComponent } from './components/handle-all-partner/handle-all-partner.component';
+import { MaterialModule } from './shared/material-module';
+//import { MaterialModule } from './shared/material-module';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -55,6 +61,8 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbDialogModule,
+  NbCardModule,
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -64,6 +72,8 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  DialogNamePromptComponent,
+  HandleAllPartnerComponent
 ];
 const PIPES = [
   CapitalizePipe,
@@ -74,7 +84,7 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, MatRippleModule, ...NB_MODULES],
+  imports: [CommonModule, MatRippleModule, MaterialModule, ...NB_MODULES],
   exports: [CommonModule, MatRippleModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })

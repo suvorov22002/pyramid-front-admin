@@ -16,11 +16,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { TemperatureComponent } from './temperature/temperature.component';
 import { KittenComponent } from './kitten/kitten.component';
-import { SecurityCamerasComponent } from './security-cameras/security-cameras.component';
-import { WeatherComponent } from './weather/weather.component';
-import { SolarComponent } from './solar/solar.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -43,11 +39,7 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     StatusCardComponent,
     ContactsComponent,
-    TemperatureComponent,
-    KittenComponent,
-    SecurityCamerasComponent,
-    WeatherComponent,
-    SolarComponent
-  ],
+    KittenComponent
+  ]
 })
 export class DashboardModule { }

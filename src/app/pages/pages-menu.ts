@@ -2,6 +2,10 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'DASHBOARD',
+    group: true,
+  },
+  {
     title: 'IoT Dashboard',
     icon: 'home-outline',
     link: '/pages/iot-dashboard',
@@ -16,23 +20,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Creer partenaire',
-        link: '/pages/layout/partner',
+        link: '/pages/partners/partner',
       },
       {
         title: 'Gestion partenaire',
-        link: '/pages/layout/managepartner',
+        link: '/pages/partners/managepartner',
       },
       {
         title: 'Paramétrages',
-        link: '/pages/layout/parametrages',
+        link: '/pages/partners/parametrages',
       },
       {
         title: 'Gestion Salle',
-        link: '/pages/layout/salle',
+        link: '/pages/partners/salle',
       },
       {
         title: 'Gestion Subscription',
-        link: '/pages/layout/enroll',
+        link: '/pages/partners/enroll',
       }
     ],
   },

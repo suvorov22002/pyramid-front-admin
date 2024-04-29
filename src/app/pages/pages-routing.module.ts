@@ -15,9 +15,9 @@ const routes: Routes = [{
       component: DashboardComponent,
     },
     {
-      path: 'layout',
-      loadChildren: () => import('./layout/layout.module')
-        .then(m => m.LayoutModule),
+      path: 'partners',
+      loadChildren: () => import('./partners/partners.module')
+        .then(m => m.PartnersModule),
     },
     {
       path: 'forms',
@@ -30,19 +30,9 @@ const routes: Routes = [{
         .then(m => m.UiFeaturesModule),
     },
     {
-      path: 'modal-overlays',
-      loadChildren: () => import('./modal-overlays/modal-overlays.module')
-        .then(m => m.ModalOverlaysModule),
-    },
-    {
       path: 'extra-components',
       loadChildren: () => import('./extra-components/extra-components.module')
         .then(m => m.ExtraComponentsModule),
-    },
-    {
-      path: 'charts',
-      loadChildren: () => import('./charts/charts.module')
-        .then(m => m.ChartsModule),
     },
     {
       path: 'editors',

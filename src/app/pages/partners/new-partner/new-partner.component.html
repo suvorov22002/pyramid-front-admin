@@ -27,14 +27,6 @@
                               oninput="this.value = this.value.toUpperCase()" maxlength="20" size="20"
                               [status]="firstForm.invalid && (firstForm.dirty || firstForm.touched) ? 'danger' : 'info'">
                           </div>
-
-                          <div
-                            *ngIf="firstForm.controls.designation.invalid && (firstForm.controls.designation.dirty || firstForm.controls.designation.touched)">
-                            <span *ngIf="firstForm.controls.designation.errors?.required">
-                              Please Enter a number.
-                            </span>
-                          </div>
-
                         </div>
                       </div>
                       <div class="row">
@@ -64,8 +56,7 @@
                         </div>
                       </div>
                       <!-- <button type="submit" nbButton status="primary">Submit</button> -->
-                      <button nbButton matRipple status="primary" type="submit"
-                        (click)="onPartnerSubmit(stepper)"
+                      <button nbButton matRipple status="primary" type="submit" (click)="onPartnerSubmit(stepper)"
                         [disabled]="validateSubmit() || !(firstForm.valid && firstForm.dirty)">
                         Suivant
                       </button>
@@ -132,7 +123,7 @@
                             <label for="bonusmin" class="label">Bonus Minimum</label>
                             <input type="number" nbInput fullWidth class="form-control" id="bonusmin"
                               placeholder="Bonus minimum" formControlName="bonusmin" min="0"
-                              oninput="validity.valid||(value='');" 
+                              oninput="validity.valid||(value='');"
                               [status]="secondForm.invalid && (secondForm.dirty || secondForm.touched) ? 'danger' : 'info'">
                           </div>
                         </div>
@@ -150,8 +141,7 @@
                       </div>
 
                       <button nbButton matRipple nbStepperPrevious status="warning">Retour</button>
-                      <button nbButton matRipple status="primary" type="submit"
-                        (click)="onParametreSubmit(stepper)"
+                      <button nbButton matRipple status="primary" type="submit" (click)="onParametreSubmit(stepper)"
                         [disabled]="isPartnerExists() || !(secondForm.valid)">
                         Suivant
                       </button>
@@ -183,8 +173,7 @@
                           <div class="form-group">
                             <label for="bonusrate" class="label">Taux du Bonus</label>
                             <input type="number" nbInput fullWidth class="form-control" id="bonusrate"
-                              placeholder="Taux Bonus" formControlName="bonusrate" readonly
-                              status="info">
+                              placeholder="Taux Bonus" formControlName="bonusrate" readonly status="info">
                           </div>
                         </div>
 
@@ -192,8 +181,7 @@
                           <div class="form-group">
                             <label for="misemin" class="label">Mise Minimale</label>
                             <input type="number" nbInput fullWidth class="form-control" id="misemin"
-                              placeholder="Mise minimale" formControlName="misemin" readonly
-                              status="info">
+                              placeholder="Mise minimale" formControlName="misemin" readonly status="info">
                           </div>
                         </div>
 
@@ -205,8 +193,8 @@
                               <nb-select-label class="nb-label">
                                 {{ selectedItem }}
                               </nb-select-label>
-                             
-                              <nb-option *ngFor="let game of games" [value]="game.code">{{game.designation}}</nb-option>
+
+                              <nb-option *ngFor="let game of allGames" [value]="game.code">{{game.designation}}</nb-option>
                             </nb-select>
                           </div>
                         </div>
@@ -218,8 +206,7 @@
                           <div class="form-group">
                             <label for="percentage" class="label">Pourcentage</label>
                             <input type="number" nbInput fullWidth class="form-control" id="percentage"
-                              placeholder="Percentage" formControlName="percentage" readonly
-                              status="info">
+                              placeholder="Percentage" formControlName="percentage" readonly status="info">
                           </div>
                         </div>
 
@@ -227,8 +214,7 @@
                           <div class="form-group">
                             <label for="bonusmin" class="label">Bonus Minimum</label>
                             <input type="number" nbInput fullWidth class="form-control" id="bonusmin"
-                              placeholder="Bonus minimum" formControlName="bonusmin" readonly
-                              status="info">
+                              placeholder="Bonus minimum" formControlName="bonusmin" readonly status="info">
                           </div>
                         </div>
 
@@ -236,8 +222,7 @@
                           <div class="form-group">
                             <label for="misemax" class="label">Mise Maximale</label>
                             <input type="number" nbInput fullWidth class="form-control" id="misemax"
-                              placeholder="Mise maximale" formControlName="misemax" readonly
-                              status="info">
+                              placeholder="Mise maximale" formControlName="misemax" readonly status="info">
                           </div>
                         </div>
 
@@ -283,8 +268,7 @@
                           <div class="form-group">
                             <label for="codePartenaire" class="label">Code Partenaire</label>
                             <input type="text" nbInput fullWidth id="codePartenaire" placeholder="code Partenaire"
-                              formControlName="codePartenaire" status="info" readonly
-                            >
+                              formControlName="codePartenaire" status="info" readonly>
                           </div>
                         </div>
                         <div class="col-sm-6">
@@ -311,7 +295,7 @@
                           <div class="form-group">
                             <label for="status" class="label">Status</label>
                             <div class="demo-items">
-                              <nb-radio-group [(value)]="roomGroupValue"  formControlName="status">
+                              <nb-radio-group [(value)]="roomGroupValue" formControlName="status">
                                 <nb-radio [value]="'ACTIVE'">
                                   ACTIF
                                 </nb-radio>
@@ -324,7 +308,8 @@
                         </div>
                       </div>
                       <button nbButton matRipple nbStepperPrevious status="warning">Retour</button>
-                      <button nbButton matRipple status="primary" type="submit" (click)="onRoomCreationSubmit(stepper)">Suivant</button>
+                      <button nbButton matRipple status="primary" type="submit"
+                        (click)="onRoomCreationSubmit(stepper)">Suivant</button>
                     </nb-card-body>
                   </nb-card>
                 </div>

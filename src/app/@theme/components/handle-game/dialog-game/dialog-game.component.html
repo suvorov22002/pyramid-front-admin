@@ -1,0 +1,52 @@
+<div class="row" style="width: 650px;">
+    <div class="col-md-12">
+        <nb-card [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="warning">
+            <nb-card-header class="head-dialog">Ajout de Jeu</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="firstForm" class="step-container">
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="codeGame" class="label">Code</label>
+                                <input type="text" nbInput fullWidth id="codeGame" placeholder="code jeu"
+                                    formControlName="code" maxlength="5" minlength="4"
+                                    oninput="this.value = this.value.toUpperCase()"
+                                    [status]="firstForm.invalid && (firstForm.dirty || firstForm.touched) ? 'danger' : 'info'">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="designation" class="label">Designation</label>
+                                <input type="text" nbInput fullWidth id="designation" placeholder="Designation"
+                                     formControlName="designation" class="form-control"
+                                     oninput="this.value = this.value.toUpperCase()"
+                                     [status]="firstForm.invalid && (firstForm.dirty || firstForm.touched) ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="description" class="label">Description</label>
+                                <!--<input type="text" nbInput fullWidth id="description"
+                                    formControlName="description" class="form-control"
+                                    oninput="this.value = this.value.toUpperCase()"
+                                    [status]="firstForm.invalid && (firstForm.dirty || firstForm.touched) ? 'danger' : 'info'">-->
+                                <textarea rows="3" nbInput fullWidth  placeholder="Description" formControlName="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <nb-card-footer class="flex-button">
+                        <button class="cancel" nbButton matRipple status="danger" (click)="cancel()">Cancel</button>
+                        <button nbButton matRipple status="success" (click)="onCreateGame()"
+                            [disabled]="validateSubmit() || !(firstForm.valid && firstForm.dirty)">
+                            Submit
+                        </button>
+                    </nb-card-footer>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

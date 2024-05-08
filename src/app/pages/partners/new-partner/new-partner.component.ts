@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { GlobalConstants } from '../../../@theme/shared/global-constants';
 import { PartnerService } from '../../../@core/services/partner.service';
 import { Partner } from '../../../@core/data/partner';
 import { NbDialogService } from '@nebular/theme';
 import { DialogNamePromptComponent } from '../../../@theme/components/dialog-name-prompt/dialog-name-prompt.component';
-import { RequestResponse } from '../../../@core/data';
 import { Parameter, ParameterResponse } from '../../../@core/data/parameter';
 import { ParameterService } from '../../../@core/services/parameter.service';
 import { Enrollment } from '../../../@core/data/enrollment';
@@ -13,6 +12,7 @@ import { EnrollmentService } from '../../../@core/services/enrollment.service';
 import { Game } from '../../../@core/data/game';
 import { SalleService } from '../../../@core/services/salle.service';
 import { Salle } from '../../../@core/data/salle';
+import { GameService } from '../../../@core/services/game.service';
 
 @Component({
   selector: 'ngx-new-partner',
@@ -37,10 +37,7 @@ export class NewPartnerComponent implements OnInit {
   isLoading: boolean = false;
   createdPartner: Partner;
   parameter: Parameter;
-  games: Game[] = [
-    {code: 'KENO', designation: 'KENO'},
-    {code: 'BINGO', designation: 'BINGO'}
-  ] 
+  allGames: Game[];
 
   get codePartenaire(): AbstractControl {
     return this.firstForm.get('codePartenaire');
@@ -48,7 +45,7 @@ export class NewPartnerComponent implements OnInit {
 
   constructor(private fb: UntypedFormBuilder, private formbuilder: FormBuilder,
     private partnerService: PartnerService, private dialogService: NbDialogService, private parameterService: ParameterService,
-    private enrollService: EnrollmentService, private roomservice: SalleService) {
+    private enrollService: EnrollmentService, private roomservice: SalleService, private gameservice: GameService) {
   }
 
   ngOnInit() {
@@ -94,6 +91,8 @@ export class NewPartnerComponent implements OnInit {
       localisation: ['', Validators.required],
       codePartenaire: ['']
     });
+
+    this.onLoadAllGame();
 
   }
 
@@ -287,6 +286,18 @@ export class NewPartnerComponent implements OnInit {
 
   updatePartner() {
 
+  }
+
+  onLoadAllGame() {
+
+    this.gameservice.listAllgames().subscribe({
+      next: (data: Game[]) => {
+        this.allGames = data;
+      },
+      error: () => {
+        console.log("error")
+      }
+    })
   }
 
   defaultParamValue() {

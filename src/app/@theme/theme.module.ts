@@ -16,6 +16,10 @@ import {
   NbDialogModule,
   NbCardModule,
   NbSpinnerModule,
+  NbInputModule,
+  NbCheckboxModule,
+  NbRadioModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -47,6 +51,14 @@ import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
 import { DialogNamePromptComponent } from './components/dialog-name-prompt/dialog-name-prompt.component';
 import { HandleAllPartnerComponent } from './components/handle-all-partner/handle-all-partner.component';
 import { MaterialModule } from './shared/material-module';
+import { HandleAllRoomComponent } from './components/handle-all-room/handle-all-room.component';
+import { DialogRoomComponent } from './components/handle-all-room/dialog/dialog-room/dialog-room.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StatusPipe } from './pipes/status.pipe';
+import { HandleGameComponent } from './components/handle-game/handle-game.component';
+import { DialogGameComponent } from './components/handle-game/dialog-game/dialog-game.component';
+import { HandleAllUsersComponent } from './components/handle-all-users/handle-all-users.component';
+import { DialogUserComponent } from './components/handle-all-users/dialog-user/dialog-user.component';
 //import { MaterialModule } from './shared/material-module';
 
 const NB_MODULES = [
@@ -64,7 +76,16 @@ const NB_MODULES = [
   NbEvaIconsModule,
   NbDialogModule,
   NbCardModule,
-  NbSpinnerModule
+  NbSpinnerModule,
+  NbInputModule,
+  NbActionsModule,
+  NbCheckboxModule,
+  NbRadioModule,
+  NbDatepickerModule,
+  NbSelectModule,
+  NbIconModule,
+  FormsModule,
+  ReactiveFormsModule,
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -75,7 +96,13 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   DialogNamePromptComponent,
-  HandleAllPartnerComponent
+  HandleAllPartnerComponent,
+  HandleAllRoomComponent,
+  DialogRoomComponent,
+  HandleGameComponent,
+  DialogGameComponent,
+  HandleAllUsersComponent
+  
 ];
 const PIPES = [
   CapitalizePipe,
@@ -83,12 +110,13 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
+  StatusPipe
 ];
 
 @NgModule({
   imports: [CommonModule, MatRippleModule, MaterialModule, ...NB_MODULES],
   exports: [CommonModule, MatRippleModule, ...PIPES, ...COMPONENTS],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES, DialogUserComponent],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

@@ -6,7 +6,8 @@ export interface Salle {
     status?: string;
     designation: string;
     localisation: string;
-    partnerCode?: string;
+    partnerCode: string;
+    codeSalle?: string;
 }
 
 export interface SalleResponse extends RequestResponse<Salle> { }
@@ -16,4 +17,6 @@ export abstract class SalleData {
     abstract listAllRooms(): Observable<Salle[]>;
     abstract listAllPartnerRooms(code: string): Observable<Salle[]>;
     abstract updateEnroll(id: number, salle: Salle): Observable<Salle>;
+    abstract listAllRoomPartner(code: string): Observable<Salle[]>;
+    abstract updateSalleStatus(data: any): Observable<Salle>;
 }

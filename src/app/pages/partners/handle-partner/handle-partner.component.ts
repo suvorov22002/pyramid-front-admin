@@ -3,7 +3,6 @@ import { PartnerService } from '../../../@core/services/partner.service';
 import { Partner } from '../../../@core/data/partner';
 import { ReplaySubject, from } from 'rxjs';
 import { SalleService } from '../../../@core/services/salle.service';
-import { concatMap } from 'rxjs/operators';
 
 
 
@@ -43,27 +42,4 @@ export class HandlePartnerComponent implements OnInit{
     })
   }
 
-
-  handleEditAction(element){
-
-  }
-
-  handleDeleteAction(element){
-
-  }
-
-  onChange(status: any, id: number){
-
-  }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(): Partner {
-  
-  return {
-    codePartner: "ZEIRFDND?D?D?D",
-    designation: "SUPERTBE",
-    localisation: "TSINGA",
-    status: "ACTIVE"
-  };
 }

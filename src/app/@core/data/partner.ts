@@ -17,4 +17,6 @@ export abstract class PartnerData {
     abstract createNewPartner(partner: Partner): Observable<Partner>;
     abstract listAllPartners(): Observable<Partner[]>;
     abstract updatePartnerStatus(data: any): Observable<Partner>;
+    abstract listPartners(): Observable<Partner[]>;
+    abstract listPartnerByCode(code: string): Observable<Partner[]>;
 }

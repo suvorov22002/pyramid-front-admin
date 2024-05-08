@@ -33,6 +33,18 @@ export class PartnerService extends PartnerData {
     
   }
 
+  listPartners(): Observable<Partner[]> {
+
+    return this.httpClient.get<Partner[]>(`${this.API_URL}/${this.namespace}/all`)
+    
+  }
+
+  listPartnerByCode(code: string): Observable<Partner[]> {
+
+    return this.httpClient.get<Partner[]>(`${this.API_URL}/${this.namespace}/code/${code}`)
+    
+  }
+
   updatePartner(partner: Partner): Observable<Partner> {
 
     return this.httpClient.put<Partner>(`${this.API_URL}/${this.namespace}/${partner.id}`, partner, {

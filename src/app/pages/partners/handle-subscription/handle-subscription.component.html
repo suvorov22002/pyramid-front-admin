@@ -1,33 +1,153 @@
-<nb-card>
-    <nb-card-body>
+<div class="mat-elevation-z8 w100">
+    <mat-card class="flex-container">
+        <div class="grid-container">
+            <mat-form-field appearance="fill" [style.fontSize.px]="12">
+                <mat-select placeholder="Partenaire" name="code_partner" [(ngModel)]="code_partner"
+                    (selectionChange)="onSelectPartner()">
+                    <mat-option *ngFor="let partner of allPartners"
+                        [value]="partner">{{partner.designation}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <label class="search-label" for="search">Search:</label>
-        <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
+            <mat-form-field appearance="fill" [style.fontSize.px]="12">
+                <mat-select placeholder="Jeu" name="code_game" [(ngModel)]="code_game"
+                    (selectionChange)="onSelectGame()">
+                    <mat-option *ngFor="let game of allGames" [value]="game">{{game.designation}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-        <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+        <div class="button-ma">
+            <button nbButton matRipple status="info" (click)="openAddNewGame()">
+                <nb-icon class="action-icon" icon='plus-outline'></nb-icon>Add jeu
+            </button>
+            <button nbButton matRipple status="success" (click)="registerNewGame()" [disabled]="canRegisterGame()">
+                Enregistrer
+            </button>
+        </div>
 
-            <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-            <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+    </mat-card>
 
-            <ng-container [nbTreeGridColumnDef]="customColumn">
-                <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
-                    {{customColumn}}
-                </th>
-                <td nbTreeGridCell *nbTreeGridCellDef="let row">
-                    <ngx-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-fs-icon>
-                    {{row.data[customColumn]}}
-                </td>
+    <nb-card *ngFor="let enroll of enrollmentDisplayData;let index = index;" style="margin-bottom: 0.25rem;">
+
+        <nb-card-body>
+            <div class="full-name-inputs">
+
+                <div>
+                    <label class="label">Partenaire</label>
+                    <input type="text" nbInput fullWidth id="partner_{{index}}" placeholder="code Partenaire" status="info"
+                        readonly value="{{enroll.partner}}">
+                </div>
+
+
+                <div>
+                    <label class="label">Jeu</label>
+                    <input type="text" nbInput fullWidth id="game_{{index}}" placeholder="code Jeu" status="info" readonly
+                        value="{{enroll.game}}">
+                </div>
+
+                <div>
+                    <label class="label" for="percent_{{index}}">Pourcentage</label>
+                    <input type="number" nbInput fullWidth id="percent_{{index}}" placeholder="Pourcentage" status="info"
+                        value="{{enroll.percent}}" min="0" max="92" oninput="validity.valid||(value='');">
+                </div>
+
+                <div>
+                    <label class="label" for="misemax_{{index}}">Mise Max</label>
+                    <input type="number" nbInput fullWidth id="misemax_{{index}}" placeholder="Mise Max" status="info"
+                        value="{{enroll.miseMax}}" min="0" max="10000" oninput="validity.valid||(value='');">
+                </div>
+
+                <div>
+                    <label class="label" for="misemin_{{index}}">Mise Min</label>
+                    <input type="number" nbInput fullWidth id="misemin_{{index}}" placeholder="Mise Min" status="info"
+                        value="{{enroll.miseMin}}" min="0" max="10000" oninput="validity.valid||(value='');">
+                </div>
+                
+                <div>
+                    <label class="label" for="bonusrate_{{index}}">Bonus Rate</label>
+                    <input type="number" nbInput fullWidth id="bonusrate_{{index}}" placeholder="Bonus Rate" status="info"
+                        value="{{enroll.bonusRate}}" min="0" max="10" oninput="validity.valid||(value='');">
+                </div>
+                <div>
+                    <label class="label" for="bonusmax_{{index}}">Bonus Max</label>
+                    <input type="number" nbInput fullWidth id="bonusmax_{{index}}" placeholder="Bonus Max" status="info"
+                        value="{{enroll.bonusMax}}" min="0" max="10000" oninput="validity.valid||(value='');">
+                </div>
+                <div>
+                    <label style="visibility: hidden;">{{index}}</label>
+                    <button nbButton matRipple status="info" (click)="openRemoveNewGame(enroll)">
+                        X
+                    </button>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+
+
+</div>
+
+<div class="mat-elevation-z8 w100" style="overflow-x:auto;">
+
+    <nb-card [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="warning">
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Code Partner Column -->
+            <ng-container matColumnDef="partner">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Partenaire </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.codeSalle}} </mat-cell>
             </ng-container>
 
-            <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column"
-                [showOn]="getShowOn(index)">
-                <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
-                    {{column}}
-                </th>
-                <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
+            <!-- Designation Column -->
+            <ng-container matColumnDef="game">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Jeu </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.designation}} </mat-cell>
             </ng-container>
 
-        </table>
+            <!-- Localisation Column -->
+            <ng-container matColumnDef="misemin">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Mise Min </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.localisation}} </mat-cell>
+            </ng-container>
 
-    </nb-card-body>
-</nb-card>
+            <!-- Partner Column -->
+            <ng-container matColumnDef="misemax">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Mise Max </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.partnerCode}} </mat-cell>
+            </ng-container>
+
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="percent">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Pourcentage </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.percent}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="bonusrate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Bonus Rate </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.bonusRate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="bonusmax">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Bonus Max </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.bonusMax}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-link">
+                    <button mat-icon-button color="primary" matTooltip="delete" (click)="handleDeleteAction(row)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <mat-slide-toggle (change)="onChange($event.checked, row.id)"
+                        matTooltip="Activate or Deactivate partner" [checked]="row.status"></mat-slide-toggle>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </nb-card>
+
+</div>

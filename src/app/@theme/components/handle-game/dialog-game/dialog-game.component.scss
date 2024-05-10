@@ -1,0 +1,33 @@
+button {
+    cursor: pointer;
+    margin: 0.5rem;
+}
+
+.flex-button {
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nb-checkbox {
+    margin-bottom: 1rem;
+}
+
+.form-inline [fullWidth] {
+    flex: 1;
+}
+
+.form-inline>* {
+    margin: 0 1.5rem 1.5rem 0;
+}
+
+nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+}
+
+.head-dialog {
+    
+    background-color: #b7b7b2;
+    
+    
+}

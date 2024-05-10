@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ParameterService extends ParameterData{
-
+  
   private namespace: String = "api/v1/parameters"
   private API_URL: string = environment.apiUrl;
   
@@ -26,4 +26,9 @@ export class ParameterService extends ParameterData{
   listAllParameters(): Observable<ParameterResponse> {
     throw new Error('Method not implemented.');
   }
+
+  selectPartner(id: number): Observable<Parameter> {
+    return this.httpClient.get<Parameter>(`${this.API_URL}/${this.namespace}/${id}`);
+  }
+
 }

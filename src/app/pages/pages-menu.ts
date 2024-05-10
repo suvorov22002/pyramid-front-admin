@@ -46,22 +46,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Creation utilisateur',
-        link: '/pages/forms/inputs',
+        link: '/pages/users/manageusers',
       }
     ],
   },
   {
     title: 'Salles',
     icon: 'keypad-outline',
-    link: '/pages/ui-features',
     children: [
       {
         title: 'Creation Salle',
-        link: '/pages/ui-features/grid',
+        link: '/pages/rooms/managerooms',
       },
       {
-        title: 'Evenements',
-        link: '/pages/ui-features/icons',
+        title: 'Comptabilite',
+        link: '/pages/rooms/account',
       }
     ],
   },
@@ -70,8 +69,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'browser-outline',
     children: [
       {
-        title: 'Dialog',
-        link: '/pages/modal-overlays/dialog',
+        title: 'Gestion jeux',
+        link: '/pages/games/managegames',
       },
     ],
   },

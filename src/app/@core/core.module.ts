@@ -15,12 +15,10 @@ import {
 } from './utils';
 import { UserData } from './data/users';
 import { UserActivityData } from './data/user-activity';
-import { CountryOrderData } from './data/country-order';
 
 
 import { UserService } from './mock/users.service';
 import { UserActivityService } from './mock/user-activity.service';
-import { OrdersChartService } from './mock/orders-chart.service';
 import { RippleService } from './utils/ripple.service';
 import { MockDataModule } from './mock/mock-data.module';
 

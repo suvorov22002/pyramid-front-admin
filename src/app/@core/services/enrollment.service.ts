@@ -22,6 +22,12 @@ export class EnrollmentService extends EnrollmentData{
     })
   }
 
+  enrollAllGame(enrolls: Enrollment[]): Observable<Enrollment[]> {
+    return this.httpClient.post<Enrollment[]>(`${this.API_URL}/${this.namespace}/all`, enrolls, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
+  }
+
   listAllEnrolls(): Observable<Enrollment[]> {
     return this.httpClient.get<Enrollment[]>(`${this.API_URL}/${this.namespace}`);
   }

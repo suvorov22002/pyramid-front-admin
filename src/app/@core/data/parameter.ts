@@ -16,4 +16,5 @@ export interface ParameterResponse extends RequestResponse<Parameter> { }
 export abstract class ParameterData {
     abstract updateParameter(id: number, parameter: Parameter): Observable<ParameterResponse>;
     abstract listAllParameters(): Observable<ParameterResponse>;
+    abstract selectPartner(id: number): Observable<Parameter>;
 }

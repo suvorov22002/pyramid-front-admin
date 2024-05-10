@@ -1,0 +1,110 @@
+<div class="row" style="width: 650px;">
+    <div class="col-md-12">
+        <nb-card [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="warning">
+            <nb-card-header class="head-dialog">{{dialogAction}} utilisateur</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="firstForm" class="step-container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="partner" class="label">Partenaire</label>
+                                <!-- <input type="text" nbInput fullWidth id="partner" placeholder="Partenaire"
+                                    formControlName="codePartner"> -->
+                                <nb-select placeholder="Choisir partenaire" [(selected)]="selectedItem"
+                                    formControlName="partner" fullWidth [status]="firstForm.controls.partner.touched && firstForm.controls.partner.invalid ? 'danger' : 'info'">
+                                    <nb-select-label class="nb-label">
+                                        {{ selectedItem?.designation }}
+                                    </nb-select-label>
+
+                                    <nb-option *ngFor="let partner of allPartners$ | async"
+                                        [value]="partner">{{partner.designation}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="role" class="label">Role</label>
+                                <nb-select placeholder="Choisir role" [(selected)]="selectedRole"
+                                    formControlName="role" fullWidth status="info">
+                                    <nb-select-label class="nb-label">
+                                        {{ selectedRole }}
+                                    </nb-select-label>
+
+                                    <nb-option *ngFor="let role of allRoles"
+                                        [value]="role">{{role}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="login" class="label">Login</label>
+                                <input type="text" nbInput fullWidth id="login" placeholder="Login"
+                                    formControlName="login" class="form-control"
+                                    oninput="this.value = this.value.toUpperCase()"
+                                    [status]="firstForm.controls.login.touched && firstForm.controls.login.invalid ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name" class="label">Nom</label>
+                                <input type="text" nbInput fullWidth id="name" placeholder="Nom"
+                                    formControlName="name" class="form-control"
+                                    oninput="this.value = this.value.toUpperCase()"
+                                    [status]="firstForm.controls.name.touched && firstForm.controls.name.invalid ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="number" class="label">Numero Telephone</label>
+                                <input type="text" nbInput fullWidth id="number" placeholder="Telephone"
+                                    formControlName="phoneNumber" class="form-control"
+                                    [status]="firstForm.controls.phoneNumber.touched && firstForm.controls.phoneNumber.invalid ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email" class="label">Email</label>
+                                <input type="text" nbInput fullWidth id="email" placeholder="Email"
+                                    formControlName="email" class="form-control"
+                                    oninput="this.value = this.value.toLowerCase()"
+                                    [status]="firstForm.controls.email.touched && firstForm.controls.email.invalid ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password" class="label">Password</label>
+                                <input type="password" nbInput fullWidth id="password" placeholder="Password"
+                                    formControlName="password" class="form-control"
+                                    [status]="firstForm.controls.password.touched && firstForm.controls.password.invalid ? 'danger' : 'info'">
+                                    <span class="error" *ngIf="validateSubmit()">* Weak password.</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="confirmpassword" class="label">Confirm Password</label>
+                                <input type="password" nbInput fullWidth id="confirmpassword" placeholder="Confirm password"
+                                    formControlName="confirmpassword" class="form-control"
+                                    [status]="firstForm.controls.confirmpassword.touched && firstForm.controls.confirmpassword.invalid ? 'danger' : 'info'">
+                                <label style="background-color: blue;"><span class="error" *ngIf="validateSubmit()">* New password and confirm password does not match.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <nb-card-footer class="flex-button">
+                        <button class="cancel" nbButton matRipple status="danger" (click)="cancel()">Cancel</button>
+                        <button nbButton matRipple status="success" (click)="onCreateUser()"
+                            [disabled]="validateSubmit() || !(firstForm.valid && firstForm.dirty)">
+                            {{dialogAction}}
+                        </button>
+                       
+                    </nb-card-footer>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

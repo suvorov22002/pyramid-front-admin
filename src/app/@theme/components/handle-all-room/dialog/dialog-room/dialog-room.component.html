@@ -1,0 +1,62 @@
+<div class="row" style="width: 650px;">
+    <div class="col-md-12">
+        <nb-card [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="warning">
+            <nb-card-header class="head-dialog">Ajout de salle</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="firstForm" class="step-container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="partner" class="label">Partenaire</label>
+                                <!-- <input type="text" nbInput fullWidth id="partner" placeholder="Partenaire"
+                                    formControlName="codePartner"> -->
+                                <nb-select placeholder="Choisir partenaire" [(selected)]="selectedItem" formControlName="partner"
+                                    fullWidth status="info">
+                                <nb-select-label class="nb-label">
+                                    {{ selectedItem?.designation }}
+                                </nb-select-label>
+    
+                                <nb-option *ngFor="let partner of allPartners$ | async" [value]="partner">{{partner.designation}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="codeSalle" class="label">Salle</label>
+                                <input type="text" nbInput fullWidth id="codeSalle" placeholder="Salle" readonly
+                                    formControlName="codeSalle" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="designation" class="label">Designation</label>
+                                <input type="text" nbInput fullWidth id="designation" placeholder="Designation"
+                                     formControlName="designation" class="form-control"
+                                     oninput="this.value = this.value.toUpperCase()"
+                                     [status]="firstForm.invalid && (firstForm.dirty || firstForm.touched) ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="localisation" class="label">Localisation</label>
+                                <input type="text" nbInput fullWidth id="localisation" placeholder="Localisation"
+                                    formControlName="localisation" class="form-control"
+                                    oninput="this.value = this.value.toUpperCase()"
+                                    [status]="firstForm.invalid && (firstForm.dirty || firstForm.touched) ? 'danger' : 'info'">
+                            </div>
+                        </div>
+                    </div>
+                    <nb-card-footer class="flex-button">
+                        <button class="cancel" nbButton matRipple status="danger" (click)="cancel()">Cancel</button>
+                        <button nbButton matRipple status="success" (click)="onCreateRoom()"
+                            [disabled]="validateSubmit() || !(firstForm.valid && firstForm.dirty)">
+                            Submit
+                        </button>
+                    </nb-card-footer>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -23,11 +23,24 @@ export class SalleService extends SalleData{
   }
 
   listAllRooms(): Observable<Salle[]> {
-    throw new Error('Method not implemented.');
+    return this.httpClient.get<Salle[]>(`${this.API_URL}/${this.namespace}`)
+  }
+
+  listAllRoomPartner(code: string): Observable<Salle[]> {
+    return this.httpClient.get<Salle[]>(`${this.API_URL}/${this.namespace}/partner/${code}`)
   }
   
   updateEnroll(id: number, salle: Salle): Observable<Salle> {
     throw new Error('Method not implemented.');
+  }
+
+  updateSalleStatus(data: any): Observable<Salle>{
+    return this.httpClient.put<Salle>(`${this.API_URL}/${this.namespace}/${data.id}/${data.status}`, data, 
+    {headers: new HttpHeaders().set('content-Type', 'application/json')})
+  }
+
+  listAllPartnerRooms(code: string): Observable<Salle[]> {
+    return this.httpClient.get<Salle[]>(`${this.API_URL}/${this.namespace}/all/partner/${code}`)
   }
 
 }

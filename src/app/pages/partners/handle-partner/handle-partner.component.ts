@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PartnerService } from '../../../@core/services/partner.service';
 import { Partner } from '../../../@core/data/partner';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, from } from 'rxjs';
+import { SalleService } from '../../../@core/services/salle.service';
 
 
 
@@ -16,7 +17,7 @@ export class HandlePartnerComponent implements OnInit{
   allPartners$: ReplaySubject<Partner[]> = new ReplaySubject(1)
 
 
-  constructor(private partnerservice: PartnerService) {
+  constructor(private partnerservice: PartnerService, private roomservice: SalleService) {
     
   }
   
@@ -29,8 +30,7 @@ export class HandlePartnerComponent implements OnInit{
   onLoadAllPartners() {
 
     this.partnerservice.listAllPartners().subscribe({
-      next: (data) => {
-        
+      next: (data: any) => {
         this.allPartners$.next(data.data);
       },
       error: () => {
@@ -42,26 +42,4 @@ export class HandlePartnerComponent implements OnInit{
     })
   }
 
-  handleEditAction(element){
-
-  }
-
-  handleDeleteAction(element){
-
-  }
-
-  onChange(status: any, id: number){
-
-  }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(): Partner {
-  
-  return {
-    codePartner: "ZEIRFDND?D?D?D",
-    designation: "SUPERTBE",
-    localisation: "TSINGA",
-    status: "ACTIVE"
-  };
 }

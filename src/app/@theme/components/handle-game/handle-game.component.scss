@@ -1,0 +1,47 @@
+.example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+    line-height: 25px;
+}
+
+
+mat-card {
+    padding: 20px;
+}
+
+::ng-deep .highlight {
+    color: white;
+    background: #673ab7;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #b7b7b2;
+    width: 100%;
+}
+
+.grid-container {
+    display: grid;
+    /*grid-template-columns: auto auto auto;
+    grid-gap: 1px;
+    padding: 2cap;*/
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+}
+
+.button-ma {
+    margin-right: 1px;
+    font-size: 10px;
+    float: right;
+}
+
+mat-header-cell {
+    font-weight: bold;
+}

@@ -1,59 +1,33 @@
-@import '../../../@theme/styles/themes';
+.full-name-inputs {
+  display: flex;
+  margin: 0 -0.25rem;
 
-@include nb-install-component() {
-    button[nbTreeGridRowToggle] {
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
+  > * {
+    margin: 0 0.25rem;
+  }
+}
 
-    .search-label {
-        display: block;
-    }
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #b7b7b2;
+  width: 100%;
+}
 
-    .search-input {
-        margin-bottom: 1rem;
-    }
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+}
 
-    .nb-column-name {
-        width: 100%;
-    }
+.button-ma {
+  height: fit-content;
+  display: flex;
+  > * {
+    margin: 0 0.25rem;
+  }
+}
 
-    ::ng-deep .row-toggle-button {
-        color: nb-theme(text-basic-color);
-    }
-
-    .nb-tree-grid-header-cell,
-    .nb-tree-grid-header-cell button {
-        text-transform: capitalize;
-    }
-
-    @media screen and (min-width: 400px) {
-
-        .nb-column-name,
-        .nb-column-size {
-            width: 50%;
-        }
-    }
-
-    @media screen and (min-width: 500px) {
-
-        .nb-column-name,
-        .nb-column-size,
-        .nb-column-kind {
-            width: 33.333%;
-        }
-    }
-
-    @media screen and (min-width: 600px) {
-        .nb-column-name {
-            width: 31%;
-        }
-
-        .nb-column-size,
-        .nb-column-kind,
-        .nb-column-items {
-            width: 23%;
-        }
-    }
+mat-card {
+  padding: 20px;
 }

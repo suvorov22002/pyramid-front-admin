@@ -18,8 +18,6 @@ import {
   NbTabsetModule, NbTreeGridModule, NbUserModule,
 } from '@nebular/theme';
 
-
-import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ParametragesComponent } from './parametrages/parametrages.component';
 import { NewPartnerComponent } from './new-partner/new-partner.component';
@@ -33,6 +31,8 @@ import { PartnersRoutingModule } from './partners-routing.module';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MaterialModule } from '../../@theme/shared/material-module';
 import { ThemeModule } from '../../@theme/theme.module';
+import { HandleUsersComponent } from '../users/handle-users/handle-users.component';
+
 
 const formulaireModule = [
   NbInputModule,
@@ -81,10 +81,11 @@ const tableGridModule = [
     HandlePartnerComponent,
     FsIconComponent,
     HandleSalleComponent,
-    HandleSubscriptionComponent
+    HandleSubscriptionComponent,
+    HandleUsersComponent
   ],
   providers: [
-    NewsService,
+   
   ],
 })
 export class PartnersModule { }

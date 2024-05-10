@@ -1,0 +1,73 @@
+<mat-card class="flex-container">
+    <div class="grid-container">
+        <mat-form-field appearance="fill" [style.fontSize.px]="12">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+        </mat-form-field>
+       
+    </div>
+
+    <div class="button-ma">
+        <button nbButton matRipple status="info" (click)="openWithoutBackdropClick(dialog)" size="large">
+            Nouveau jeu
+        </button>
+    </div>
+
+</mat-card>
+
+<div class="mat-elevation-z8 w100" style="overflow-x:auto;">
+
+    <nb-card [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="warning">
+
+        <mat-table [dataSource]="dataSource" matSort>
+            <!--<table  mat-table matSort [dataSource]="dataSource" class="" style="overflow-x:auto;">-->
+
+            <!-- Code Partner Column -->
+            <ng-container matColumnDef="code">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Salle </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+            </ng-container>
+
+            <!-- Designation Column -->
+            <ng-container matColumnDef="designation">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Designation </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.designation}} </mat-cell>
+            </ng-container>
+
+             <!-- Description Column -->
+             <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-link">
+                    <button mat-icon-button color="primary" matTooltip="edit" (click)="handleEditAction(row)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" matTooltip="delete" (click)="handleDeleteAction(row)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <mat-slide-toggle (change)="onChange($event.checked, row.id)"
+                        matTooltip="Activate or Deactivate partner" [checked]="row.status"></mat-slide-toggle>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </nb-card>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>Ajouter Jeu</nb-card-header>
+        <nb-card-body>{{ data }}</nb-card-body>
+        <nb-card-footer>
+            <button nbButton matRipple (click)="ref.close()">Close Dialog</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>

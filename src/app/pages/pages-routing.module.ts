@@ -20,14 +20,19 @@ const routes: Routes = [{
         .then(m => m.PartnersModule),
     },
     {
-      path: 'forms',
-      loadChildren: () => import('./forms/forms.module')
-        .then(m => m.FormsModule),
+      path: 'rooms',
+      loadChildren: () => import('./rooms/room.module')
+        .then(m => m.RoomModule),
     },
     {
-      path: 'ui-features',
-      loadChildren: () => import('./ui-features/ui-features.module')
-        .then(m => m.UiFeaturesModule),
+      path: 'games',
+      loadChildren: () => import('./games/games.module')
+        .then(m => m.GamesModule),
+    },
+    {
+      path: 'users',
+      loadChildren: () => import('./users/user.module')
+        .then(m => m.UserModule),
     },
     {
       path: 'extra-components',

@@ -6,6 +6,7 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -48,7 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -56,8 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private userService: UserData,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService,
-    private rippleService: RippleService,
+    protected router: Router
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
@@ -71,25 +71,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
-
-    const { xl } = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-      .pipe(
-        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-        takeUntil(this.destroy$),
-      )
-      .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
-
-    this.themeService.onThemeChange()
-      .pipe(
-        map(({ name }) => name),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(themeName => {
-        this.currentTheme = themeName;
-        this.rippleService.toggle(themeName?.startsWith('material'));
+      .subscribe((users: any) => {
+        console.log("Users",users)
+        this.user = {
+          ...users.data[0],
+          picture: 'assets/images/alan.png'
+        }
       });
+
+    this.menuService.onItemClick().subscribe(event => {
+      if (event.item.title === 'Log out') {
+        localStorage.clear();
+        return this.router.navigateByUrl('/');
+      }
+    });
+  }
+
+  contextMenu(event) {
+    console.log(event);
   }
 
   ngOnDestroy() {
@@ -113,4 +112,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
 }

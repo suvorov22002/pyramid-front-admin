@@ -39,4 +39,8 @@ export class EnrollmentService extends EnrollmentData{
   updateEnroll(id: number, enroll: Enrollment): Observable<Enrollment> {
     throw new Error('Method not implemented.');
   }
+
+  listAllPartnerEnrolls(partner: string): Observable<Enrollment[]> {
+    return this.httpClient.get<Enrollment[]>(`${this.API_URL}/${this.namespace}/partner/${partner}`);
+  }
 }

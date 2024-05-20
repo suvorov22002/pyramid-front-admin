@@ -10,28 +10,28 @@
                                 <label for="partner" class="label">Partenaire</label>
                                 <!-- <input type="text" nbInput fullWidth id="partner" placeholder="Partenaire"
                                     formControlName="codePartner"> -->
-                                <nb-select placeholder="Choisir partenaire" [(selected)]="selectedItem"
-                                    formControlName="partner" fullWidth [status]="firstForm.controls.partner.touched && firstForm.controls.partner.invalid ? 'danger' : 'info'">
+                                <nb-select id="partner" placeholder="Choisir partenaire" [(selected)]="selectedItem"
+                                    formControlName="partnerCode" fullWidth
+                                    [status]="firstForm.controls.partnerCode.touched && firstForm.controls.partnerCode.invalid ? 'danger' : 'info'">
                                     <nb-select-label class="nb-label">
-                                        {{ selectedItem?.designation }}
+                                        {{ selectedItem }}
                                     </nb-select-label>
 
-                                    <nb-option *ngFor="let partner of allPartners$ | async"
-                                        [value]="partner">{{partner.designation}}</nb-option>
+                                    <nb-option *ngFor="let partner of allPartners"
+                                        [value]="partner">{{partner}}</nb-option>
                                 </nb-select>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="role" class="label">Role</label>
-                                <nb-select placeholder="Choisir role" [(selected)]="selectedRole"
+                                <nb-select id="role" placeholder="Choisir role" [(selected)]="selectedRole"
                                     formControlName="role" fullWidth status="info">
                                     <nb-select-label class="nb-label">
                                         {{ selectedRole }}
                                     </nb-select-label>
 
-                                    <nb-option *ngFor="let role of allRoles"
-                                        [value]="role">{{role}}</nb-option>
+                                    <nb-option *ngFor="let role of allRoles" [value]="role">{{role}}</nb-option>
                                 </nb-select>
                             </div>
                         </div>
@@ -49,9 +49,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="name" class="label">Nom</label>
-                                <input type="text" nbInput fullWidth id="name" placeholder="Nom"
-                                    formControlName="name" class="form-control"
-                                    oninput="this.value = this.value.toUpperCase()"
+                                <input type="text" nbInput fullWidth id="name" placeholder="Nom" formControlName="name"
+                                    class="form-control" oninput="this.value = this.value.toUpperCase()"
                                     [status]="firstForm.controls.name.touched && firstForm.controls.name.invalid ? 'danger' : 'info'">
                             </div>
                         </div>
@@ -82,16 +81,18 @@
                                 <input type="password" nbInput fullWidth id="password" placeholder="Password"
                                     formControlName="password" class="form-control"
                                     [status]="firstForm.controls.password.touched && firstForm.controls.password.invalid ? 'danger' : 'info'">
-                                    <span class="error" *ngIf="validateSubmit()">* Weak password.</span>
+                                <span class="error" *ngIf="validateSubmit()">* Weak password.</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="confirmpassword" class="label">Confirm Password</label>
-                                <input type="password" nbInput fullWidth id="confirmpassword" placeholder="Confirm password"
-                                    formControlName="confirmpassword" class="form-control"
+                                <input type="password" nbInput fullWidth id="confirmpassword"
+                                    placeholder="Confirm password" formControlName="confirmpassword"
+                                    class="form-control"
                                     [status]="firstForm.controls.confirmpassword.touched && firstForm.controls.confirmpassword.invalid ? 'danger' : 'info'">
-                                <label style="background-color: blue;"><span class="error" *ngIf="validateSubmit()">* New password and confirm password does not match.</span></label>
+                                <span class="error" *ngIf="validateSubmit()">* New password and confirm password does
+                                    not match.</span>
                             </div>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                             [disabled]="validateSubmit() || !(firstForm.valid && firstForm.dirty)">
                             {{dialogAction}}
                         </button>
-                       
+
                     </nb-card-footer>
                 </form>
             </nb-card-body>

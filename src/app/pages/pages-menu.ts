@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { LoginComponent, hasRoles } from '../auth/login/login.component';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -6,9 +7,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'IoT Dashboard',
+    title: 'Partner Dashboard',
     icon: 'home-outline',
-    link: '/pages/iot-dashboard',
+    link: '/pages/dashboard',
   },
   {
     title: 'FEATURES',
@@ -21,22 +22,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Creer partenaire',
         link: '/pages/partners/partner',
+        hidden: hasRoles(['SUPERADMIN'])
       },
       {
         title: 'Gestion partenaire',
         link: '/pages/partners/managepartner',
+        hidden: hasRoles(['SUPERADMIN', 'ADMIN'])
       },
       {
         title: 'Paramétrages',
         link: '/pages/partners/parametrages',
+        hidden: hasRoles(['SUPERADMIN', 'ADMIN'])
       },
       {
         title: 'Gestion Salle',
         link: '/pages/partners/salle',
+        hidden: hasRoles(['SUPERADMIN', 'ADMIN'])
       },
       {
         title: 'Gestion Subscription',
         link: '/pages/partners/enroll',
+        hidden: hasRoles(['SUPERADMIN', 'ADMIN'])
       }
     ],
   },
@@ -47,6 +53,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Creation utilisateur',
         link: '/pages/users/manageusers',
+        hidden: hasRoles(['SUPERADMIN', 'ADMIN'])
       }
     ],
   },
@@ -57,6 +64,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Creation Salle',
         link: '/pages/rooms/managerooms',
+        hidden: hasRoles(['SUPERADMIN'])
       },
       {
         title: 'Comptabilite',
@@ -71,8 +79,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Gestion jeux',
         link: '/pages/games/managegames',
+       
       },
     ],
+    hidden: hasRoles(['SUPERADMIN'])
   },
   {
     title: 'Turnover',
@@ -93,12 +103,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'map-outline',
     children: [
       {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
+        title: 'Mouvement des tickets',
+        link: '/pages/betting/managebets',
       },
       {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
+        title: 'Rapport caisse',
+        link: '/pages/betting/reports',
       },
     ],
   },

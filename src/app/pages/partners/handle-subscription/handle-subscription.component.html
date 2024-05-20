@@ -12,12 +12,15 @@
             <mat-form-field appearance="fill" [style.fontSize.px]="12">
                 <mat-select placeholder="Jeu" name="code_game" [(ngModel)]="code_game"
                     (selectionChange)="onSelectGame()">
-                    <mat-option *ngFor="let game of allGames" [value]="game">{{game.designation}}</mat-option>
+                    <mat-option *ngFor="let game of allDisplayGames" [value]="game">{{game.designation}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
         <div class="button-ma">
+            <button nbButton matRipple status="info" (click)="onLoadEnroll()">
+                <nb-icon class="action-icon" icon='refresh'></nb-icon>
+            </button>
             <button nbButton matRipple status="info" (click)="openAddNewGame()">
                 <nb-icon class="action-icon" icon='plus-outline'></nb-icon>Add jeu
             </button>
@@ -87,7 +90,7 @@
 
 </div>
 
-<div class="mat-elevation-z8 w100" style="overflow-x:auto;">
+<div class="mat-elevation-z8 w100" style="overflow-x:auto;" [hidden]="isShow">
 
     <nb-card [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="warning">
 
@@ -96,29 +99,29 @@
             <!-- Code Partner Column -->
             <ng-container matColumnDef="partner">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Partenaire </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.codeSalle}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.partner}} </mat-cell>
             </ng-container>
 
-            <!-- Designation Column -->
+            <!-- game Column -->
             <ng-container matColumnDef="game">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Jeu </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.designation}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.game}} </mat-cell>
             </ng-container>
 
-            <!-- Localisation Column -->
+            <!-- misemin Column -->
             <ng-container matColumnDef="misemin">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Mise Min </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.localisation}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.miseMin}} </mat-cell>
             </ng-container>
 
-            <!-- Partner Column -->
+            <!-- misemax Column -->
             <ng-container matColumnDef="misemax">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Mise Max </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.partnerCode}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.miseMax}} </mat-cell>
             </ng-container>
 
 
-            <!-- Status Column -->
+            <!-- Pourcentage Column -->
             <ng-container matColumnDef="percent">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Pourcentage </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.percent}} </mat-cell>

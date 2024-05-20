@@ -19,20 +19,14 @@ import {
 } from '@nebular/theme';
 
 import { FormsModule as ngFormsModule } from '@angular/forms';
-import { ParametragesComponent } from './parametrages/parametrages.component';
-import { NewPartnerComponent } from './new-partner/new-partner.component';
-import { HandlePartnerComponent } from './handle-partner/handle-partner.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { HandleSalleComponent } from './handle-salle/handle-salle.component';
-import { HandleSubscriptionComponent } from './handle-subscription/handle-subscription.component';
-import { FsIconComponent } from './fs-icon/fs-icon.component';
-import { PartnersComponent } from './partners.component';
-import { PartnersRoutingModule } from './partners-routing.module';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MaterialModule } from '../../@theme/shared/material-module';
 import { ThemeModule } from '../../@theme/theme.module';
-import { HandleUsersComponent } from '../users/handle-users/handle-users.component';
-
+import { BettingComponent } from './betting.component';
+import { HandleBettingComponent } from './handle-betting/handle-betting.component';
+import { BettingRoutingModule } from './betting-routing.module';
+import { HandleCashierReportComponent } from './handle-cashier-report/handle-cashier-report.component';
 
 const formulaireModule = [
   NbInputModule,
@@ -41,7 +35,8 @@ const formulaireModule = [
   NbRadioModule,
   NbDatepickerModule,
   NbSelectModule,
-  NbIconModule
+  NbIconModule,
+  ngFormsModule
 ];
 
 const tableGridModule = [
@@ -65,7 +60,7 @@ const tableGridModule = [
     NbListModule,
     NbAccordionModule,
     NbUserModule,
-    PartnersRoutingModule,
+    BettingRoutingModule,
     CdkTableModule,
     NbSpinnerModule,
     MaterialModule,
@@ -74,17 +69,12 @@ const tableGridModule = [
 
   ],
   declarations: [
-    PartnersComponent,
-    ParametragesComponent,
-    NewPartnerComponent,
-    HandlePartnerComponent,
-    FsIconComponent,
-    HandleSalleComponent,
-    HandleSubscriptionComponent,
-    HandleUsersComponent
+    BettingComponent,
+    HandleBettingComponent,
+    HandleCashierReportComponent
   ],
   providers: [
    
   ],
 })
-export class PartnersModule { }
+export class BettingModule { }

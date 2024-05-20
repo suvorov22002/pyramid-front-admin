@@ -11,7 +11,7 @@ const routes: Routes = [{
   children: [
   
     {
-      path: 'iot-dashboard',
+      path: 'dashboard',
       component: DashboardComponent,
     },
     {
@@ -35,19 +35,14 @@ const routes: Routes = [{
         .then(m => m.UserModule),
     },
     {
-      path: 'extra-components',
-      loadChildren: () => import('./extra-components/extra-components.module')
-        .then(m => m.ExtraComponentsModule),
-    },
-    {
-      path: 'editors',
-      loadChildren: () => import('./editors/editors.module')
-        .then(m => m.EditorsModule),
-    },
-    {
       path: 'miscellaneous',
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
+    },
+    {
+      path: 'betting',
+      loadChildren: () => import('./betting/betting.module')
+        .then(m => m.BettingModule),
     },
     {
       path: '',

@@ -6,7 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PartnerService } from '../../../@core/services/partner.service';
 import { SalleService } from '../../../@core/services/salle.service';
-import { concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-handle-all-partner',

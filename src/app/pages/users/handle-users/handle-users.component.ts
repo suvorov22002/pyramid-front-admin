@@ -30,7 +30,6 @@ export class HandleUsersComponent implements OnInit {
     this.partnerservice.listPartners().subscribe(
       {
         next: (data: any) => {
-          console.log("this.allPartners$", data)
           this.allPartners$.next(data);
         },
         error: () => {
@@ -47,7 +46,6 @@ export class HandleUsersComponent implements OnInit {
     this.userservice.getUsers().subscribe(
       {
         next: (data: any) => {
-          console.log("All USer", data)
           this.allUser$.next(data.data);
         },
         error: () => {

@@ -26,7 +26,11 @@ export class HandleSubscriptionComponent implements OnInit {
   code_game: Game;
   allPartners: Partner[];
   allGames: Game[];
+  allDisplayGames: Game[];
   parameter: Parameter;
+  allEnrolls: Enrollment[] = [];
+  currentEnroll: string[] = [];
+  isShow: boolean = true;
 
   displayedColumns = ['partner', 'game', 'misemin', 'misemax', 'percent', 'bonusrate', 'bonusmax', 'edit'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
@@ -41,6 +45,7 @@ export class HandleSubscriptionComponent implements OnInit {
   ngOnInit(): void {
     this.onLoadAllPartners();
     this.onLoadAllGame();
+    //this.onLoadEnroll();
   }
 
   onSelectGame() {
@@ -50,7 +55,8 @@ export class HandleSubscriptionComponent implements OnInit {
   openAddNewGame() {
 
     if (this.code_partner === undefined || this.code_game === undefined || this.code_partner === null || this.code_game === null) return;
-
+    
+    this.isShow = true;
     var newGame = {
       "partner": this.code_partner.codePartner,
       "game": this.code_game.code,
@@ -157,25 +163,32 @@ export class HandleSubscriptionComponent implements OnInit {
       alert(this.error_message)
     }
     else{
-      
+      this.isLoading = true;
       if(this.enrollmentData.length === 1) {
+       
         this.enrollservice.enrollGame(this.enrollmentData[0]).subscribe(
           (res) => {
-            console.log(res);
+            this.isLoading = false;
             this.enrollmentData = [];
             this.enrollmentDisplayData = [];
           },
-          (error) => {console.log(error)}
+          (error) => {
+            console.log(error);
+            this.isLoading = false;
+          }
         )
       }
       else{
         this.enrollservice.enrollAllGame(this.enrollmentData).subscribe(
           (res) => {
-            console.log(res);
+            this.isLoading = false;
             this.enrollmentData = [];
             this.enrollmentDisplayData = [];
           },
-          (error) => {console.log(error)}
+          (error) => {
+            console.log(error);
+            this.isLoading = false;
+          }
         )
       }
     }
@@ -218,14 +231,45 @@ export class HandleSubscriptionComponent implements OnInit {
   }
 
   onSelectPartner() {
+    
+    this.code_game = null;
 
     this.paramservice.selectPartner(this.code_partner.id).subscribe(
       (resp) => {
         this.parameter = resp;
-
       },
       (error) => {
         console.log(error)
+      }
+    )
+
+    this.enrollservice.listAllPartnerEnrolls(this.code_partner.designation).subscribe(
+      (resp: Enrollment[]) => {
+        this.currentEnroll = resp.map(e => e.game);
+        this.allDisplayGames = this.allGames.filter(g => !this.currentEnroll.includes(g.code));
+      }
+    )
+
+  }
+
+  onLoadEnroll() {
+    this.isShow = false;
+    this.isLoading = true;
+    this.enrollmentDisplayData = [];
+    this.enrollmentData = [];
+    this.enrollservice.listAllEnrolls().subscribe(
+      (data: Enrollment[]) => {
+        this.allEnrolls = data;
+        this.dataSource.data = this.allEnrolls;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.isLoading = false;
+        /*setTimeout(
+          () => {
+            this.onLoadEnroll();
+          }, 1000
+        )*/
       }
     )
 

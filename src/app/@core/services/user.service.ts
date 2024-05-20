@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Contacts, RecentUsers, User, UserData } from '../data/users';
+import { User, UserData } from '../data/users';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -29,12 +29,6 @@ export class UserService extends UserData{
   updateUserStatus(data: any): Observable<User> {
     return this.httpClient.put<User>(`${this.API_URL}/${this.namespace}/${data.id}/${data.status}`, data, 
     {headers: new HttpHeaders().set('content-Type', 'application/json')})
-  }
-  getContacts(): Observable<Contacts[]> {
-    throw new Error('Method not implemented.');
-  }
-  getRecentUsers(): Observable<RecentUsers[]> {
-    throw new Error('Method not implemented.');
   }
 
 }

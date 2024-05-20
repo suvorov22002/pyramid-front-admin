@@ -4,15 +4,6 @@
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
         </mat-form-field>
-
-        <mat-form-field appearance="fill" [style.fontSize.px]="12">
-            <mat-select placeholder="Statut" name="room_status" [(ngModel)]="room_status"
-                (selectionChange)="onStatusFilter()">
-                <mat-option value=""></mat-option>
-                <mat-option value="true">ACTIVE</mat-option>
-                <mat-option value="false">INACTIVE</mat-option>
-            </mat-select>
-        </mat-form-field>
     </div>
 
     <div class="button-ma">

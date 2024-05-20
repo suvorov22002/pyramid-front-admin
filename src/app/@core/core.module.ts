@@ -14,13 +14,10 @@ import {
   StateService,
 } from './utils';
 import { UserData } from './data/users';
-import { UserActivityData } from './data/user-activity';
 
 
-import { UserService } from './mock/users.service';
-import { UserActivityService } from './mock/user-activity.service';
 import { RippleService } from './utils/ripple.service';
-import { MockDataModule } from './mock/mock-data.module';
+import { UserService } from './services/user.service';
 
 const socialLinks = [
   {
@@ -42,8 +39,7 @@ const socialLinks = [
 
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
-  { provide: UserActivityData, useClass: UserActivityService },
-  {provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: RippleService},
+  { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: RippleService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -54,7 +50,6 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
 
@@ -66,10 +61,31 @@ export const NB_CORE_PROVIDERS = [
     ],
     forms: {
       login: {
-        socialLinks: socialLinks,
+        redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
+        strategy: 'email',  // strategy id key.
+        rememberMe: false,   // whether to show or not the `rememberMe` checkbox
+        showMessages: {     // show/not show success/error messages
+          success: true,
+          error: true,
+        },
       },
       register: {
         socialLinks: socialLinks,
+      },
+      validation: {
+        password: {
+          required: true,
+          minLength: 4,
+          maxLength: 50,
+        },
+        email: {
+          required: true,
+        },
+        fullName: {
+          required: false,
+          minLength: 4,
+          maxLength: 50,
+        },
       },
     },
   }).providers,

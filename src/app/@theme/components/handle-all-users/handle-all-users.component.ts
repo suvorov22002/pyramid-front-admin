@@ -104,6 +104,7 @@ export class HandleAllUsersComponent implements OnInit, AfterViewInit {
       DialogUserComponent,
       {
         context: {
+          action: 'Add',
           data$: this.allPartners$
         },
         closeOnBackdropClick: false,

@@ -1,0 +1,33 @@
+.full-name-inputs {
+    display: flex;
+    margin: 0 -0.25rem;
+  
+    > * {
+      margin: 0 0.25rem;
+    }
+  }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #b7b7b2;
+    width: 100%;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+  
+  .button-ma {
+    height: fit-content;
+    display: flex;
+    > * {
+      margin: 0 0.25rem;
+    }
+  }
+  
+  mat-card {
+    padding: 20px;
+  }

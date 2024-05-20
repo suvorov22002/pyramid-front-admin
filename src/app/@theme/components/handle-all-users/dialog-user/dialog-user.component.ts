@@ -19,13 +19,15 @@ export class DialogUserComponent implements OnInit {
   firstForm: UntypedFormGroup;
   isLoading: boolean = false;
   allPartners$: Observable<Partner[]> = new Observable<Partner[]>();
-  selectedItem: any;
+  allPartners: string[] = [];
+  selectedItem: string;
   selectedRole: string;
   allRoles: string[] = ['ADMIN', 'MANAGER', 'CASHIER'];
   data$: any;
   action: string;
   data: any;
   dialogAction: string = "Add";
+  currentPartner: Partner;
 
   constructor(private fb: UntypedFormBuilder, protected ref: NbDialogRef<DialogUserComponent>,
     private userservice: UserService, private partnerservice: PartnerService) { }
@@ -33,7 +35,7 @@ export class DialogUserComponent implements OnInit {
   ngOnInit(): void {
 
     this.firstForm = this.fb.group({
-      partner: [null, Validators.required],
+      partnerCode: [null, Validators.required],
       role: [null, Validators.required],
       login: [null, [Validators.required, Validators.pattern(GlobalConstants.loginRegex)]],
       name: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
@@ -43,26 +45,36 @@ export class DialogUserComponent implements OnInit {
       confirmpassword: [null, Validators.required],
     });
 
+    
     this.onLoadPartner();
-    console.log("Action: " + this.action)
-    console.log("Element: ",this.data)
-    console.log("Element: ",this.data$)
+   
     if(this.action === 'Edit') {
-      this.firstForm.patchValue(this.data);
+
       this.selectedRole = this.data.role;
       this.selectedItem = this.data.partnerCode;
+     
       this.dialogAction = 'Edit';
+      this.firstForm.patchValue(this.data);
+
+    }
+    else{
+      this.onLoadPartner();
     }
   }
 
   onLoadPartner() {
     //this.allPartners$ = this.partnerservice.listPartners();
     this.allPartners$ = this.data$;
+    this.data$.subscribe(
+      (data: Partner[]) => {
+        this.allPartners = data.map(p => p.designation)
+      }
+    )
   }
 
   onCreateUser() {
    
-    if(this.dialogAction === 'Add') {
+    if(this.dialogAction === 'Edit') {
       this.editUser();
     }
     else{
@@ -74,23 +86,31 @@ export class DialogUserComponent implements OnInit {
   addUser() {
 
     var formData = this.firstForm.value;
-    console.log("Create User",formData)
+    
     var data = {
       login: formData.login,
       name: formData.name,
       password: formData.password,
-      partnerCode: formData.partner.codePartner,
+      partnerCode: formData.partnerCode,
       phoneNumber: formData.phoneNumber,
       email: formData.email,
       role: formData.role
     }
 
+    this.isLoading = true;
+
     this.userservice.createUser(data).subscribe(
       (res: User) => {
-        console.log("Registered user", res)
+        setTimeout(
+          () => {
+            this.isLoading = false;
+            this.ref.close(res);
+          }, 1000
+        )
       },
       (error) => {
-        console.log(error)
+        console.log(error);
+        this.isLoading = false;
       }
     )
 
@@ -102,6 +122,7 @@ export class DialogUserComponent implements OnInit {
       id: this.data.id,
       login: formData.login
     }
+    console.log("Edit",data)
   }
 
   cancel() {
@@ -120,7 +141,8 @@ export class DialogUserComponent implements OnInit {
   fillCurrentPartner(){
     this.allPartners$.subscribe(
       (data: Partner[]) => {
-        
+        this.currentPartner = data.find(p => p.designation === this.data.partnerCode)
+       // this.selectedItem = this.currentPartner;
       }
     )
   }
